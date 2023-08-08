@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Guess the number</title>
+</head>
+<body>
+<h1>Guess the number</h1>
+<p id="text"></p>
+<div style="display: inline-flex;">
+<button id="guess" onclick="guess()">Guess</button>
+<input id="input" type="number">
+<button onclick="start_over()">Start over</button>
+</div>
+<script>
+var urlParams = new URLSearchParams(window.location.search)
+let collection = ["test", "test", false, true]
+let number = urlParams.get("number")
+if (collection[3] || number == null) {
+number = collection[1]
+}
+let p = document.getElementById("text")
+p.innerText = collection[0]
+if (collection[2]) {
+document.getElementById("guess").hidden = true
+}
+function guess() {
+let guess = document.getElementById("input").value
+let origin = location.origin
+let params = "/?guess=" + guess + "&number=" + number
+location.assign(origin + params)
+}
+function start_over() {
+location.assign(location.origin)
+}
+</script>
+</body>
+</html>
